@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="uz">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,43 +9,52 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Swiper CSS (Slayder uchun) -->
+    <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
     <style>
-        html { scroll-behavior: smooth; }
-        .hero-bg {
-            background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1200&q=80');
-            background-size: cover;
-            background-position: center;
+        /* Haqiqiy bank kartasi nisbati (85.6mm x 53.98mm => ~1.586 : 1) */
+        .bank-card {
+            aspect-ratio: 85.6 / 53.98;
+            border-radius: 16px;
         }
     </style>
 </head>
+
 <body class="bg-gray-50 text-gray-800 font-sans">
 
     <!-- NAVIGATION BAR -->
-    <nav class="fixed w-full bg-white/95 backdrop-blur-md shadow-sm z-50 transition-all">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-                <i class="fa-solid font-bold text-amber-600 text-2xl fa-paw"></i>
+    <nav class="fixed w-full bg-white/95 backdrop-blur-md shadow-sm z-50 transition-all top-0 left-0">
+        <div class="w-full px-4 sm:px-8 h-16 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3">
+                <img src="images/logo.png" alt="Четыре Лапы Logo"
+                    class="h-10 w-10 object-contain rounded-full shadow-sm"
+                    onerror="this.src='https://placehold.co/100x100?text=4Paws'">
                 <span class="font-bold text-xl text-gray-900" id="nav-logo">Четыре Лапы</span>
-            </div>
-            
-            <div class="hidden md:flex gap-6 font-medium text-gray-600 text-sm">
+            </a>
+
+            <div class="hidden lg:flex gap-6 font-medium text-gray-600 text-sm">
                 <a href="#about" class="hover:text-amber-600 transition" id="nav-about">История</a>
                 <a href="#family" class="hover:text-amber-600 transition" id="nav-family">Семья Дудниковых</a>
-                <a href="#animals" class="hover:text-amber-600 transition" id="nav-animals">Они ищут дом</a>
+                <a href="#animals" class="hover:text-amber-600 transition" id="nav-animals">Животные приюта</a>
                 <a href="#donate" class="hover:text-amber-600 transition" id="nav-donate">Помочь</a>
+                <a href="#requisites" class="hover:text-amber-600 transition" id="nav-requisites">Реквизиты</a>
                 <a href="#reports" class="hover:text-amber-600 transition" id="nav-reports">Нужды и Долги</a>
                 <a href="#contact" class="hover:text-amber-600 transition" id="nav-contact">Контакты</a>
             </div>
 
             <div class="flex items-center gap-3">
                 <div class="bg-gray-100 p-1 rounded-xl flex text-xs font-bold border">
-                    <button onclick="switchLang('ru')" id="btn-ru" class="px-2.5 py-1 rounded-lg bg-amber-600 text-white transition">RU</button>
-                    <button onclick="switchLang('uz')" id="btn-uz" class="px-2.5 py-1 rounded-lg text-gray-600 hover:text-gray-900 transition">UZ</button>
+                    <button id="btn-ru" class="px-2 py-1 rounded-lg bg-amber-600 text-white transition">RU</button>
+                    <button id="btn-uz"
+                        class="px-2 py-1 rounded-lg text-gray-600 hover:text-gray-900 transition">UZ</button>
+                    <button id="btn-en"
+                        class="px-2 py-1 rounded-lg text-gray-600 hover:text-gray-900 transition">EN</button>
                 </div>
 
-                <a href="#donate" class="bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-xl text-sm font-semibold transition shadow-md flex items-center gap-1.5">
+                <a href="#requisites"
+                    class="bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-xl text-sm font-semibold transition shadow-md flex items-center gap-1.5">
                     <i class="fa-solid fa-heart text-xs"></i> <span id="nav-help-btn">Помочь</span>
                 </a>
             </div>
@@ -52,18 +62,28 @@
     </nav>
 
     <!-- HERO SECTION -->
-    <section class="hero-bg min-h-screen flex items-center justify-center text-center px-4 pt-16">
+    <section
+        class="hero-bg min-h-screen flex items-center justify-center text-center px-4 pt-16 bg-cover bg-center relative"
+        style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1200&q=80');">
         <div class="max-w-3xl text-white">
-            <span class="bg-amber-500/30 text-amber-300 text-xs font-semibold px-3 py-1 rounded-full border border-amber-400/30 uppercase tracking-wider mb-4 inline-block" id="hero-subtitle">Частный приют в Янгиюльском районе</span>
-            <h1 class="text-3xl md:text-5xl font-extrabold mb-6 leading-tight" id="hero-title">Приют для бездомных животных «Четыре Лапы»</h1>
+            <span
+                class="bg-amber-500/30 text-amber-300 text-xs font-semibold px-3 py-1 rounded-full border border-amber-400/30 uppercase tracking-wider mb-4 inline-block"
+                id="hero-subtitle">Частный приют в Янгиюльском районе</span>
+            <h1 class="text-3xl md:text-5xl font-extrabold mb-6 leading-tight" id="hero-title">Приют для бездомных
+                животных «Четыре Лапы»</h1>
             <p class="text-base md:text-lg text-gray-200 mb-8 font-light leading-relaxed" id="hero-desc">
-                Более 1000 собак, 6 осликов, десятки котят и щенков нашли здесь спасение от смерти. Приют существует только благодаря неравнодушным людям и добрым сердцам!
+                Более 1000 собак, 6 осликов, десятки котят и щенков нашли здесь спасение от смерти. Приют существует
+                только благодаря неравнодушным людям и добрым сердцам!
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="#donate" class="bg-amber-600 hover:bg-amber-700 text-white px-8 py-4 rounded-xl text-lg font-bold transition shadow-lg flex items-center justify-center gap-2" id="hero-btn-primary">
+                <a href="#requisites"
+                    class="bg-amber-600 hover:bg-amber-700 text-white px-8 py-4 rounded-xl text-lg font-bold transition shadow-lg flex items-center justify-center gap-2"
+                    id="hero-btn-primary">
                     <i class="fa-solid fa-hand-holding-heart"></i> Помочь приюту (Картой)
                 </a>
-                <a href="#about" class="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/30 px-8 py-4 rounded-xl text-lg font-bold transition flex items-center justify-center gap-2" id="hero-btn-secondary">
+                <a href="#about"
+                    class="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/30 px-8 py-4 rounded-xl text-lg font-bold transition flex items-center justify-center gap-2"
+                    id="hero-btn-secondary">
                     <i class="fa-solid fa-book-open"></i> Наша история
                 </a>
             </div>
@@ -77,13 +97,17 @@
                 <div>
                     <h2 class="text-3xl font-bold text-gray-900 mb-6" id="about-title">История создания приюта</h2>
                     <p class="text-gray-600 mb-4 leading-relaxed" id="about-p1">
-                        История начинается в 2017-2018 годах из простого неравнодушия и золотого сердца семьи Дудниковых. Помогая первым 5-10 животным, они поняли, что улицы полны боли и горя.
+                        История начинается в 2017-2018 годах из простого неравнодушия и золотого сердца семьи
+                        Дудниковых. Помогая первым 5-10 животным, они поняли, что улицы полны боли и горя.
                     </p>
                     <p class="text-gray-600 mb-4 leading-relaxed" id="about-p2">
-                        Так как в черте города Ташкента строительство приютов запрещено, Андрею предложили участок во временное пользование в Янгиюльском районе. Он не смог отказать своим детям в их мечте — спасать животных.
+                        Так как в черте города Ташкента строительство приютов запрещено, Андрею предложили участок во
+                        временное пользование в Янгиюльском районе. Он не смог отказать своим детям в их мечте — спасать
+                        животных.
                     </p>
                     <p class="text-gray-600 leading-relaxed" id="about-p3">
-                        Все это время приют строится с нуля практически только руками Андрея. Из отловов и с улиц они продолжают спасать хвостиков каждый день.
+                        Все это время приют строится с нуля практически только руками Андрея. Из отловов и с улиц они
+                        продолжают спасать хвостиков каждый день.
                     </p>
                 </div>
                 <div class="grid grid-cols-2 gap-4">
@@ -95,7 +119,8 @@
                     <div class="bg-amber-50 p-6 rounded-2xl text-center border border-amber-100">
                         <i class="fa-solid fa-house-chimney-medical text-3xl text-amber-600 mb-2"></i>
                         <div class="text-3xl font-extrabold text-gray-900">80-100</div>
-                        <div class="text-xs text-gray-600 font-medium mt-1" id="stat-puppies">Щенков и котят в доме</div>
+                        <div class="text-xs text-gray-600 font-medium mt-1" id="stat-puppies">Щенков и котят в доме
+                        </div>
                     </div>
                     <div class="bg-amber-50 p-6 rounded-2xl text-center border border-amber-100">
                         <i class="fa-solid fa-paw text-3xl text-amber-600 mb-2"></i>
@@ -117,76 +142,89 @@
         <div class="max-w-5xl mx-auto">
             <div class="text-center max-w-3xl mx-auto mb-12">
                 <h2 class="text-3xl font-bold text-gray-900 mb-4" id="fam-title">Семья Дудниковых — Сердце Приюта</h2>
-                <p class="text-gray-600" id="fam-desc">Приют держится на любви, заботе и самоотверженном труде одной уникальной семьи.</p>
+                <p class="text-gray-600" id="fam-desc">Приют держится на любви, заботе и самоотверженном труде одной
+                    уникальной семьи.</p>
             </div>
 
             <div class="bg-white p-8 md:p-12 rounded-3xl shadow-sm border border-amber-100">
                 <div class="flex items-center gap-4 mb-6">
-                    <div class="w-14 h-14 bg-amber-100 rounded-2xl flex items-center justify-center text-amber-600 text-2xl font-bold">
+                    <div
+                        class="w-14 h-14 bg-amber-100 rounded-2xl flex items-center justify-center text-amber-600 text-2xl font-bold">
                         <i class="fa-solid fa-people-roof"></i>
                     </div>
                     <div>
                         <h3 class="text-2xl font-bold text-gray-900" id="fam-card-title">Семья Дудниковых</h3>
-                        <p class="text-amber-600 font-medium text-sm" id="fam-card-subtitle">Основатели и хранители приюта «Четыре Лапы»</p>
+                        <p class="text-amber-600 font-medium text-sm" id="fam-card-subtitle">Основатели и хранители
+                            приюта «Четыре Лапы»</p>
                     </div>
                 </div>
 
                 <div class="space-y-4 text-gray-600 text-base leading-relaxed">
                     <p id="fam-card-p1">
-                        <strong>Андрей и Виктория Дудниковы</strong> — основатели приюта. Андрей своими руками построил вольеры с нуля, заготавливает корма и берет на себя самую тяжелую работу. Виктория выхаживает и лечит животных.
+                        <strong>Андрей и Виктория Дудниковы</strong> — основатели приюта. Андрей своими руками построил
+                        вольеры с нуля, заготавливает корма и берет на себя самую тяжелую работу. Виктория выхаживает и
+                        лечит животных.
                     </p>
                     <p id="fam-card-p2">
-                        Их три дочери — <strong>Кристина, Яна и Влада</strong> — с самого детства мечтали спасать животных и вдохновили родителей. Они ежедневно работают наравне со взрослыми.
+                        Их три дочери — <strong>Кристина, Яна и Влада</strong> — с самого детства мечтали спасать
+                        животных и вдохновили родителей. Они ежедневно работают наравне со взрослыми.
                     </p>
                     <p id="fam-card-p3">
-                        Вместе с ними помогает <strong>бабушка Тамара</strong>, которая ухаживает за малышами у них дома, пока они не подрастут.
+                        Вместе с ними помогает <strong>бабушка Тамара</strong>, которая ухаживает за малышами у них
+                        дома, пока они не подрастут.
                     </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ANIMALS & FILTER (ESHAKLAR FILTRI VA OT KARTOCHKASI OLIB TASHLANDI) -->
+    <!-- ANIMALS SECTION -->
     <section id="animals" class="py-20 px-4 bg-white">
         <div class="max-w-7xl mx-auto">
             <div class="text-center max-w-3xl mx-auto mb-8">
-                <h2 class="text-3xl font-bold text-gray-900 mb-3" id="anim-title">Они ищут дом</h2>
-                <p class="text-gray-600 mb-6" id="anim-desc">Priytimizdagi ba'zi jonivorlar bilan tanishing va ularga do'st bo'ling</p>
-                
-                <!-- Filtr tugmalari -->
+                <h2 class="text-3xl font-bold text-gray-900 mb-3" id="anim-title">Животные, проживающие в приюте</h2>
+                <p class="text-gray-600 mb-6" id="anim-desc">Познакомьтесь с подопечными, которые нашли здесь заботу и
+                    защиту</p>
+
                 <div class="flex flex-wrap justify-center gap-3 mb-10">
-                    <button onclick="filterAnimals('all')" id="filter-all" class="filter-btn active px-6 py-2.5 rounded-full text-sm font-semibold bg-emerald-600 text-white shadow-sm transition">
-                        <span id="f-all">Barchasi</span>
+                    <button id="filter-all" onclick="filterAnimals('all')"
+                        class="filter-btn active px-6 py-2.5 rounded-full text-sm font-semibold bg-emerald-600 text-white shadow-sm transition">
+                        <span id="f-all">Все</span>
                     </button>
-                    <button onclick="filterAnimals('dog')" id="filter-dog" class="filter-btn px-6 py-2.5 rounded-full text-sm font-semibold bg-gray-100 text-gray-700 hover:bg-gray-200 transition">
-                        <span id="f-dogs">Itlar</span>
+                    <button id="filter-dog" onclick="filterAnimals('dog')"
+                        class="filter-btn px-6 py-2.5 rounded-full text-sm font-semibold bg-gray-100 text-gray-700 hover:bg-gray-200 transition">
+                        <span id="f-dogs">Собаки</span>
                     </button>
-                    <button onclick="filterAnimals('cat')" id="filter-cat" class="filter-btn px-6 py-2.5 rounded-full text-sm font-semibold bg-gray-100 text-gray-700 hover:bg-gray-200 transition">
-                        <span id="f-cats">Mushuklar</span>
+                    <button id="filter-cat" onclick="filterAnimals('cat')"
+                        class="filter-btn px-6 py-2.5 rounded-full text-sm font-semibold bg-gray-100 text-gray-700 hover:bg-gray-200 transition">
+                        <span id="f-cats">Кошки</span>
                     </button>
                 </div>
             </div>
 
-            <!-- Kartochkalar gridi -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto" id="animal-grid">
-                <!-- Itlar kartasi -->
-                <div class="animal-card dog bg-gray-50 rounded-2xl overflow-hidden border shadow-sm transition-all duration-300">
-                    <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=600&q=80" alt="Собаки" class="w-full h-64 object-cover">
+                <div
+                    class="animal-card dog bg-gray-50 rounded-2xl overflow-hidden border shadow-sm transition-all duration-300">
+                    <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=600&q=80"
+                        alt="Собаки" class="w-full h-64 object-cover">
                     <div class="p-6">
                         <h3 class="font-bold text-xl mb-2" id="anim-card1-title">Собаки в вольерах</h3>
                         <p class="text-gray-600 text-sm leading-relaxed" id="anim-card1-desc">
-                            Более 1000 собак, спасенных с улиц и отловов. Они разделены по характеру и возрасту, имеют возможность свободно бегать в вольерах.
+                            Более 1000 собак, спасенных с улиц и отловов. Они разделены по характеру и возрасту, имеют
+                            возможность свободно бегать в вольерах.
                         </p>
                     </div>
                 </div>
 
-                <!-- Mushuklar va kuchukchalar kartasi -->
-                <div class="animal-card cat bg-gray-50 rounded-2xl overflow-hidden border shadow-sm transition-all duration-300">
-                    <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=600&q=80" alt="Малыши" class="w-full h-64 object-cover">
+                <div
+                    class="animal-card cat bg-gray-50 rounded-2xl overflow-hidden border shadow-sm transition-all duration-300">
+                    <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=600&q=80"
+                        alt="Малыши" class="w-full h-64 object-cover">
                     <div class="p-6">
                         <h3 class="font-bold text-xl mb-2" id="anim-card3-title">Щенки и Котята в доме</h3>
                         <p class="text-gray-600 text-sm leading-relaxed" id="anim-card3-desc">
-                            Так как условий для котят и совсем маленьких щенков в приюте нет, около 100 малышей живут прямо в доме семьи, где их лечат и откармливают.
+                            Так как условий для котят и совсем маленьких щенков в приюте нет, около 100 малышей живут
+                            прямо в доме семьи, где их лечат и откармливают.
                         </p>
                     </div>
                 </div>
@@ -194,414 +232,643 @@
         </div>
     </section>
 
-    <!-- AUTOMATIC SLIDER GALLERY (7-8 TALA JONIVORLAR) -->
+    <!-- AUTOMATIC SLIDER GALLERY ("ИЩУТ ДОМ") -->
     <section class="py-12 bg-amber-50/60 overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 mb-6 text-center">
-            <h3 class="text-2xl font-bold text-gray-900" id="slider-title">Uy qidirayotgan jonivorlarimiz</h3>
-            <p class="text-sm text-gray-600 mt-1" id="slider-subtitle">Har birining o'z taqdiri va mehribon ega kutayotgan nigohi bor</p>
+            <h3 class="text-2xl font-bold text-gray-900" id="slider-title">Ищут дом</h3>
+            <p class="text-sm text-gray-600 mt-1" id="slider-subtitle">У каждого из них своя история и любящий взгляд
+            </p>
         </div>
 
         <div class="swiper animalSwiper max-w-7xl mx-auto px-4 py-4">
             <div class="swiper-wrapper">
                 <div class="swiper-slide bg-white rounded-2xl overflow-hidden shadow-md border border-gray-100">
-                    <img src="https://images.unsplash.com/photo-1537151625747-768eb6cf92b2?auto=format&fit=crop&w=500&q=80" class="w-full h-52 object-cover" alt="Robi">
+                    <img src="https://images.unsplash.com/photo-1537151625747-768eb6cf92b2?auto=format&fit=crop&w=500&q=80"
+                        class="w-full h-52 object-cover" alt="Robi">
                     <div class="p-4 text-center">
-                        <h4 class="font-bold text-gray-800">Robi</h4>
-                        <span class="text-xs text-amber-600 bg-amber-50 px-2 py-1 rounded-full font-medium" id="sl-dog1">It • 2 yosh</span>
+                        <h4 class="font-bold text-gray-800">Роби</h4>
+                        <span class="text-xs text-amber-600 bg-amber-50 px-2 py-1 rounded-full font-medium"
+                            id="sl-dog1">Собака • 2 года</span>
                     </div>
                 </div>
                 <div class="swiper-slide bg-white rounded-2xl overflow-hidden shadow-md border border-gray-100">
-                    <img src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=500&q=80" class="w-full h-52 object-cover" alt="Musi">
+                    <img src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=500&q=80"
+                        class="w-full h-52 object-cover" alt="Musi">
                     <div class="p-4 text-center">
-                        <h4 class="font-bold text-gray-800">Musi</h4>
-                        <span class="text-xs text-purple-600 bg-purple-50 px-2 py-1 rounded-full font-medium" id="sl-cat1">Mushuk • 1 yosh</span>
+                        <h4 class="font-bold text-gray-800">Муси</h4>
+                        <span class="text-xs text-purple-600 bg-purple-50 px-2 py-1 rounded-full font-medium"
+                            id="sl-cat1">Кошка • 1 год</span>
                     </div>
                 </div>
                 <div class="swiper-slide bg-white rounded-2xl overflow-hidden shadow-md border border-gray-100">
-                    <img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=500&q=80" class="w-full h-52 object-cover" alt="Bobi">
+                    <img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=500&q=80"
+                        class="w-full h-52 object-cover" alt="Bobi">
                     <div class="p-4 text-center">
-                        <h4 class="font-bold text-gray-800">Bobi</h4>
-                        <span class="text-xs text-amber-600 bg-amber-50 px-2 py-1 rounded-full font-medium" id="sl-dog2">It • 3 yosh</span>
+                        <h4 class="font-bold text-gray-800">Боби</h4>
+                        <span class="text-xs text-amber-600 bg-amber-50 px-2 py-1 rounded-full font-medium"
+                            id="sl-dog2">Собака • 3 года</span>
                     </div>
                 </div>
                 <div class="swiper-slide bg-white rounded-2xl overflow-hidden shadow-md border border-gray-100">
-                    <img src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=500&q=80" class="w-full h-52 object-cover" alt="Simba">
+                    <img src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=500&q=80"
+                        class="w-full h-52 object-cover" alt="Simba">
                     <div class="p-4 text-center">
-                        <h4 class="font-bold text-gray-800">Simba</h4>
-                        <span class="text-xs text-purple-600 bg-purple-50 px-2 py-1 rounded-full font-medium" id="sl-cat2">Mushuk • 6 oy</span>
-                    </div>
-                </div>
-                <div class="swiper-slide bg-white rounded-2xl overflow-hidden shadow-md border border-gray-100">
-                    <img src="https://images.unsplash.com/photo-1561037404-61cd46aa615b?auto=format&fit=crop&w=500&q=80" class="w-full h-52 object-cover" alt="Barlus">
-                    <div class="p-4 text-center">
-                        <h4 class="font-bold text-gray-800">Barlus</h4>
-                        <span class="text-xs text-amber-600 bg-amber-50 px-2 py-1 rounded-full font-medium" id="sl-dog3">It • 1.5 yosh</span>
-                    </div>
-                </div>
-                <div class="swiper-slide bg-white rounded-2xl overflow-hidden shadow-md border border-gray-100">
-                    <img src="https://images.unsplash.com/photo-1533738363-b7f9aef128ce?auto=format&fit=crop&w=500&q=80" class="w-full h-52 object-cover" alt="Luna">
-                    <div class="p-4 text-center">
-                        <h4 class="font-bold text-gray-800">Luna</h4>
-                        <span class="text-xs text-purple-600 bg-purple-50 px-2 py-1 rounded-full font-medium" id="sl-cat3">Mushuk • 2 yosh</span>
-                    </div>
-                </div>
-                <div class="swiper-slide bg-white rounded-2xl overflow-hidden shadow-md border border-gray-100">
-                    <img src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=500&q=80" class="w-full h-52 object-cover" alt="Reks">
-                    <div class="p-4 text-center">
-                        <h4 class="font-bold text-gray-800">Reks</h4>
-                        <span class="text-xs text-amber-600 bg-amber-50 px-2 py-1 rounded-full font-medium" id="sl-dog4">It • 4 yosh</span>
-                    </div>
-                </div>
-                <div class="swiper-slide bg-white rounded-2xl overflow-hidden shadow-md border border-gray-100">
-                    <img src="https://images.unsplash.com/photo-1543852786-1cf6624b9987?auto=format&fit=crop&w=500&q=80" class="w-full h-52 object-cover" alt="Miya">
-                    <div class="p-4 text-center">
-                        <h4 class="font-bold text-gray-800">Miya</h4>
-                        <span class="text-xs text-purple-600 bg-purple-50 px-2 py-1 rounded-full font-medium" id="sl-cat4">Mushuk • 1 yosh</span>
+                        <h4 class="font-bold text-gray-800">Симба</h4>
+                        <span class="text-xs text-purple-600 bg-purple-50 px-2 py-1 rounded-full font-medium"
+                            id="sl-cat2">Кошка • 6 мес</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- DONATE SECTION WITH GENERATED QR CODES AND TEXT -->
+    <!-- DONATE SECTION -->
     <section id="donate" class="py-20 px-4 bg-white">
         <div class="max-w-5xl mx-auto bg-amber-600 rounded-3xl p-8 md:p-12 text-white shadow-xl">
             <div class="text-center mb-10">
                 <h2 class="text-3xl font-extrabold mb-3" id="don-title">Приюту жизненно необходима ваша помощь!</h2>
                 <p class="text-amber-100 max-w-xl mx-auto text-sm md:text-base" id="don-desc">
-                    Приют частный, без господдержки и постоянных спонсоров. Вы можете перевести пожертвование, отсканировав QR-код.
+                    Приют частный, без господдержки и постоянных спонсоров. Вы можете перевести пожертвование,
+                    отсканировав QR-код приложения.
                 </p>
             </div>
 
-            <!-- QR KARTALAR (TAGIDA SIKAN QILISH MATNI BILAN) -->
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-5 mb-10">
-                <div class="bg-white p-4 rounded-2xl text-center text-gray-800 shadow-md flex flex-col items-center">
-                    <span class="font-bold text-blue-600 mb-3 flex items-center gap-1 text-sm"><i class="fa-solid fa-qrcode"></i> Click</span>
-                    <div class="w-32 h-32 bg-gray-50 border p-2 rounded-xl mb-3 flex items-center justify-center">
-                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=ClickPayFourPaws" alt="QR Click" class="w-full h-full object-contain">
+            <!-- QR KODLAR GRIDI -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10 max-w-3xl mx-auto">
+                <div class="bg-white p-5 rounded-2xl text-center text-gray-800 shadow-md flex flex-col items-center">
+                    <span class="font-bold text-blue-600 mb-3 flex items-center gap-1.5 text-base">
+                        <i class="fa-solid fa-qrcode"></i> Click
+                    </span>
+                    <div class="w-44 h-44 bg-gray-50 border p-2 rounded-xl mb-3 flex items-center justify-center">
+                        <img src="images/qr-click.png" alt="Click QR Code" class="w-full h-full object-contain"
+                            onerror="this.src='https://placehold.co/200x200?text=Click+QR'">
                     </div>
-                    <p class="text-[11px] font-semibold text-gray-500 leading-tight qr-scan-text">To'lov qilish uchun skanerlang</p>
+                    <p class="text-xs font-semibold text-gray-500">Отсканируйте в Click</p>
                 </div>
 
-                <div class="bg-white p-4 rounded-2xl text-center text-gray-800 shadow-md flex flex-col items-center">
-                    <span class="font-bold text-cyan-500 mb-3 flex items-center gap-1 text-sm"><i class="fa-solid fa-qrcode"></i> Payme</span>
-                    <div class="w-32 h-32 bg-gray-50 border p-2 rounded-xl mb-3 flex items-center justify-center">
-                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=PaymeFourPaws" alt="QR Payme" class="w-full h-full object-contain">
+                <div class="bg-white p-5 rounded-2xl text-center text-gray-800 shadow-md flex flex-col items-center">
+                    <span class="font-bold text-cyan-500 mb-3 flex items-center gap-1.5 text-base">
+                        <i class="fa-solid fa-qrcode"></i> Payme
+                    </span>
+                    <div class="w-44 h-44 bg-gray-50 border p-2 rounded-xl mb-3 flex items-center justify-center">
+                        <img src="images/qr-payme.png" alt="Payme QR Code" class="w-full h-full object-contain"
+                            onerror="this.src='https://placehold.co/200x200?text=Payme+QR'">
                     </div>
-                    <p class="text-[11px] font-semibold text-gray-500 leading-tight qr-scan-text">To'lov qilish uchun skanerlang</p>
+                    <p class="text-xs font-semibold text-gray-500">Отсканируйте в Payme</p>
                 </div>
 
-                <div class="bg-white p-4 rounded-2xl text-center text-gray-800 shadow-md flex flex-col items-center">
-                    <span class="font-bold text-purple-600 mb-3 flex items-center gap-1 text-sm"><i class="fa-solid fa-qrcode"></i> Uzum</span>
-                    <div class="w-32 h-32 bg-gray-50 border p-2 rounded-xl mb-3 flex items-center justify-center">
-                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=UzumPayFourPaws" alt="QR Uzum" class="w-full h-full object-contain">
+                <div class="bg-white p-5 rounded-2xl text-center text-gray-800 shadow-md flex flex-col items-center">
+                    <span class="font-bold text-purple-600 mb-3 flex items-center gap-1.5 text-base">
+                        <i class="fa-solid fa-qrcode"></i> Uzum
+                    </span>
+                    <div class="w-44 h-44 bg-gray-50 border p-2 rounded-xl mb-3 flex items-center justify-center">
+                        <img src="images/qr-uzum.png" alt="Uzum QR Code" class="w-full h-full object-contain"
+                            onerror="this.src='https://placehold.co/200x200?text=Uzum+QR'">
                     </div>
-                    <p class="text-[11px] font-semibold text-gray-500 leading-tight qr-scan-text">To'lov qilish uchun skanerlang</p>
-                </div>
-
-                <div class="bg-white p-4 rounded-2xl text-center text-gray-800 shadow-md flex flex-col items-center">
-                    <span class="font-bold text-emerald-600 mb-3 flex items-center gap-1 text-sm"><i class="fa-solid fa-qrcode"></i> Paynet</span>
-                    <div class="w-32 h-32 bg-gray-50 border p-2 rounded-xl mb-3 flex items-center justify-center">
-                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=PaynetFourPaws" alt="QR Paynet" class="w-full h-full object-contain">
-                    </div>
-                    <p class="text-[11px] font-semibold text-gray-500 leading-tight qr-scan-text">To'lov qilish uchun skanerlang</p>
+                    <p class="text-xs font-semibold text-gray-500">Отсканируйте в Uzum</p>
                 </div>
             </div>
 
-            <!-- TUGMALAR -->
-            <div class="text-center">
-                <p class="text-sm font-semibold text-amber-100 mb-4" id="don-pay-label">Способы перевода и Международные переводы:</p>
-                <div class="flex flex-wrap justify-center gap-3">
-                    <button class="bg-white text-gray-800 font-bold px-5 py-2.5 rounded-xl hover:bg-amber-50 transition shadow-md flex items-center gap-2 text-sm">
-                        <i class="fa-solid fa-credit-card text-blue-600"></i> Click
-                    </button>
-                    <button class="bg-white text-gray-800 font-bold px-5 py-2.5 rounded-xl hover:bg-amber-50 transition shadow-md flex items-center gap-2 text-sm">
-                        <i class="fa-solid fa-wallet text-cyan-500"></i> Payme
-                    </button>
-                    <button class="bg-white text-gray-800 font-bold px-5 py-2.5 rounded-xl hover:bg-amber-50 transition shadow-md flex items-center gap-2 text-sm">
-                        <i class="fa-solid fa-building-columns text-purple-600"></i> Uzum Bank
-                    </button>
-                    <button class="bg-white text-gray-800 font-bold px-5 py-2.5 rounded-xl hover:bg-amber-50 transition shadow-md flex items-center gap-2 text-sm">
-                        <i class="fa-solid fa-money-bill-wave text-emerald-600"></i> Paynet
-                    </button>
-                    <button class="bg-white text-gray-800 font-bold px-5 py-2.5 rounded-xl hover:bg-amber-50 transition shadow-md flex items-center gap-2 text-sm border-2 border-amber-300">
-                        <i class="fa-solid fa-globe text-indigo-600"></i> Paysend (Из-за рубежа)
-                    </button>
+            <!-- BREND LOGOTIPLARI -->
+            <div class="text-center bg-amber-700/40 p-6 rounded-2xl border border-amber-400/30">
+                <p class="text-sm font-semibold text-amber-100 mb-4" id="don-app-note">Также «Четыре лапы» есть в
+                    приложениях:</p>
+
+                <div class="flex flex-wrap justify-center items-center gap-4">
+                    <div
+                        class="bg-white px-5 py-2.5 rounded-xl shadow-sm flex items-center gap-2 border border-cyan-100">
+                        <i class="fa-solid fa-wallet text-cyan-500 text-lg"></i>
+                        <span class="font-black text-cyan-600 text-sm tracking-wide">Payme</span>
+                    </div>
+                    <div
+                        class="bg-white px-5 py-2.5 rounded-xl shadow-sm flex items-center gap-2 border border-purple-100">
+                        <i class="fa-solid fa-bag-shopping text-purple-600 text-lg"></i>
+                        <span class="font-black text-purple-700 text-sm tracking-wide">uzum bank</span>
+                    </div>
+                    <div
+                        class="bg-white px-5 py-2.5 rounded-xl shadow-sm flex items-center gap-2 border border-green-100">
+                        <i class="fa-solid fa-bolt text-emerald-500 text-lg"></i>
+                        <span class="font-black text-emerald-600 text-sm tracking-wide">PAYNET</span>
+                    </div>
+                    <div
+                        class="bg-white px-5 py-2.5 rounded-xl shadow-sm flex items-center gap-2 border border-blue-100">
+                        <i class="fa-solid fa-hand-pointer text-blue-500 text-lg"></i>
+                        <span class="font-black text-blue-600 text-sm tracking-wide">click</span>
+                    </div>
                 </div>
+
+                <p class="text-xs text-amber-200 mt-4 font-medium" id="don-app-section">в разделе «Благотворительность»
+                    (Xayriya)</p>
             </div>
         </div>
     </section>
 
-    <!-- NEEDS & DEBTS -->
-    <section id="reports" class="py-20 px-4 bg-gray-50">
-        <div class="max-w-7xl mx-auto">
+    <!-- REQUISITES SECTION (HAQIQIY KARTA O'LCHAMI VA PAYSEND) -->
+    <section id="requisites" class="py-20 px-4 bg-gray-100">
+        <div class="max-w-6xl mx-auto">
             <div class="text-center max-w-3xl mx-auto mb-12">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4" id="rep-title">Ежедневные нужды и долги</h2>
-                <p class="text-gray-600" id="rep-desc">С ростом количества животных расходы растут в геометрической прогрессии. У приюта копится огромное количество долгов.</p>
+                <span class="text-amber-600 font-extrabold text-sm uppercase tracking-wider" id="req-badge">Финансовая
+                    помощь</span>
+                <h2 class="text-3xl font-extrabold text-gray-900 mt-2 mb-4" id="req-title">Реквизиты для помощи приюту
+                    «Четыре лапы» Ташкент</h2>
+                <p class="text-gray-600 text-sm" id="req-subtitle">Пожалуйста, указывайте пометку
+                    <strong>«БЛАГОТВОРИТЕЛЬНОСТЬ»</strong> при переводе</p>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="bg-white p-6 rounded-2xl border shadow-sm">
-                    <i class="fa-solid fa-bowl-rice text-amber-600 text-2xl mb-3"></i>
-                    <h4 class="font-bold text-gray-900 mb-2" id="rep-c1-title">Еда и Спецпитание</h4>
-                    <p class="text-xs text-gray-600 leading-relaxed" id="rep-c1-desc">Огромные закупки корма для более чем 1000 собак + специальное питание для выхаживания щенков.</p>
+            <!-- Kartalar guruh: har bir karta bank-card sinfiga ega (aspect ratio: 85.6 / 53.98) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- KARTA 1: Uzcard - Andrey -->
+                <div
+                    class="bank-card bg-gradient-to-tr from-slate-900 via-slate-800 to-indigo-900 text-white p-6 shadow-xl relative overflow-hidden flex flex-col justify-between border border-slate-700">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span class="text-[11px] font-semibold uppercase tracking-widest text-indigo-300">Uzcard •
+                                Сбор на питание</span>
+                            <p class="text-[10px] text-slate-300 mt-0.5" id="req-andrey-desc">Сбор на питание и мелкие
+                                расходы</p>
+                        </div>
+                        <span class="font-black italic text-base tracking-wider text-indigo-400">UZCARD</span>
+                    </div>
+                    <div class="flex items-center gap-3 my-1">
+                        <div
+                            class="w-10 h-7 bg-amber-300 rounded-md border border-amber-400/50 flex items-center justify-center opacity-90">
+                            <div class="w-7 h-4 border border-amber-600/40 rounded-sm"></div>
+                        </div>
+                        <i class="fa-solid fa-wifi text-slate-400 rotate-90 text-xs"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center justify-between">
+                            <span class="font-mono text-lg sm:text-xl font-bold tracking-widest text-slate-100">5614
+                                6812 5348 4251</span>
+                            <button onclick="copyText('5614681253484251')"
+                                class="bg-white/10 hover:bg-white/20 p-2 rounded-lg transition text-amber-400"
+                                title="Копировать">
+                                <i class="fa-solid fa-copy text-xs"></i>
+                            </button>
+                        </div>
+                        <div
+                            class="mt-2 flex justify-between items-end text-[11px] uppercase tracking-wider text-slate-300">
+                            <div>
+                                <div class="text-[9px] text-slate-400">Имя владельца</div>
+                                <div class="font-bold text-xs text-white">DUDNIKOV ANDREY</div>
+                            </div>
+                            <span class="text-[9px] text-slate-400">Д. Андрей</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="bg-white p-6 rounded-2xl border shadow-sm">
-                    <i class="fa-solid fa-kit-medical text-amber-600 text-2xl mb-3"></i>
-                    <h4 class="font-bold text-gray-900 mb-2" id="rep-c2-title">Лечение и Прививки</h4>
-                    <p class="text-xs text-gray-600 leading-relaxed" id="rep-c2-desc">Оплата ветклиник, стерилизация, кастрация, лекарства и обязательная вакцинация.</p>
+
+                <!-- KARTA 2: Uzcard - Viktoriya -->
+                <div
+                    class="bank-card bg-gradient-to-tr from-emerald-950 via-teal-900 to-emerald-800 text-white p-6 shadow-xl relative overflow-hidden flex flex-col justify-between border border-emerald-700">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span class="text-[11px] font-semibold uppercase tracking-widest text-emerald-300">Uzcard •
+                                Сбор на лечение</span>
+                            <p class="text-[10px] text-emerald-100 mt-0.5" id="req-viktoriya-desc">На лечение собак и
+                                ветеринарию</p>
+                        </div>
+                        <span class="font-black italic text-base tracking-wider text-emerald-300">UZCARD</span>
+                    </div>
+                    <div class="flex items-center gap-3 my-1">
+                        <div
+                            class="w-10 h-7 bg-amber-300 rounded-md border border-amber-400/50 flex items-center justify-center opacity-90">
+                            <div class="w-7 h-4 border border-amber-600/40 rounded-sm"></div>
+                        </div>
+                        <i class="fa-solid fa-wifi text-emerald-400 rotate-90 text-xs"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center justify-between">
+                            <span class="font-mono text-lg sm:text-xl font-bold tracking-widest text-slate-100">8600
+                                5704 5513 3578</span>
+                            <button onclick="copyText('8600570455133578')"
+                                class="bg-white/10 hover:bg-white/20 p-2 rounded-lg transition text-amber-400"
+                                title="Копировать">
+                                <i class="fa-solid fa-copy text-xs"></i>
+                            </button>
+                        </div>
+                        <div
+                            class="mt-2 flex justify-between items-end text-[11px] uppercase tracking-wider text-emerald-200">
+                            <div>
+                                <div class="text-[9px] text-emerald-300">Имя владельца</div>
+                                <div class="font-bold text-xs text-white">DUDNIKOVA VIKTORIJA</div>
+                            </div>
+                            <span class="text-[9px] text-emerald-300">Д. Виктория</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="bg-white p-6 rounded-2xl border shadow-sm">
-                    <i class="fa-solid fa-hammer text-amber-600 text-2xl mb-3"></i>
-                    <h4 class="font-bold text-gray-900 mb-2" id="rep-c3-title">Строительство вольеров</h4>
-                    <p class="text-xs text-gray-600 leading-relaxed" id="rep-c3-desc">Покупка стройматериалов для расширения вольеров, чтобы собакам было где двигаться.</p>
+
+                <!-- KARTA 3: Uzcard - Yana -->
+                <div
+                    class="bank-card bg-gradient-to-tr from-purple-950 via-purple-900 to-indigo-900 text-white p-6 shadow-xl relative overflow-hidden flex flex-col justify-between border border-purple-700">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span class="text-[11px] font-semibold uppercase tracking-widest text-purple-300">Uzcard •
+                                Помощь приюту</span>
+                            <p class="text-[10px] text-purple-200 mt-0.5" id="req-yana-desc">Карта для помощи приюту</p>
+                        </div>
+                        <span class="font-black italic text-base tracking-wider text-purple-300">UZCARD</span>
+                    </div>
+                    <div class="flex items-center gap-3 my-1">
+                        <div
+                            class="w-10 h-7 bg-amber-300 rounded-md border border-amber-400/50 flex items-center justify-center opacity-90">
+                            <div class="w-7 h-4 border border-amber-600/40 rounded-sm"></div>
+                        </div>
+                        <i class="fa-solid fa-wifi text-purple-300 rotate-90 text-xs"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center justify-between">
+                            <span class="font-mono text-lg sm:text-xl font-bold tracking-widest text-slate-100">8600
+                                5704 3109 7517</span>
+                            <button onclick="copyText('8600570431097517')"
+                                class="bg-white/10 hover:bg-white/20 p-2 rounded-lg transition text-amber-400"
+                                title="Копировать">
+                                <i class="fa-solid fa-copy text-xs"></i>
+                            </button>
+                        </div>
+                        <div
+                            class="mt-2 flex justify-between items-end text-[11px] uppercase tracking-wider text-purple-200">
+                            <div>
+                                <div class="text-[9px] text-purple-300">Имя владельца</div>
+                                <div class="font-bold text-xs text-white">DUDNIKOVA YANA</div>
+                            </div>
+                            <span class="text-[9px] text-purple-300">Д. Яна</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="bg-white p-6 rounded-2xl border shadow-sm">
-                    <i class="fa-solid fa-users text-amber-600 text-2xl mb-3"></i>
-                    <h4 class="font-bold text-gray-900 mb-2" id="rep-c4-title">Зарплата и Коммуналка</h4>
-                    <p class="text-xs text-gray-600 leading-relaxed" id="rep-c4-desc">Оплата труда 2 смотрителей, коммунальные услуги и текущие расходы на содержание.</p>
+
+                <!-- KARTA 4: Sberbank - Kristina -->
+                <div
+                    class="bank-card bg-gradient-to-tr from-green-900 via-emerald-800 to-green-950 text-white p-6 shadow-xl relative overflow-hidden flex flex-col justify-between border border-green-600">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span class="text-[11px] font-semibold uppercase tracking-widest text-green-300">Сбербанк •
+                                Из России (СБП)</span>
+                            <p class="text-[10px] text-green-100 mt-0.5">Для переводов из РФ</p>
+                        </div>
+                        <span class="font-extrabold italic text-base tracking-wider text-green-200">СБЕР</span>
+                    </div>
+                    <div class="flex items-center gap-3 my-1">
+                        <div
+                            class="w-10 h-7 bg-amber-300 rounded-md border border-amber-400/50 flex items-center justify-center opacity-90">
+                            <div class="w-7 h-4 border border-amber-600/40 rounded-sm"></div>
+                        </div>
+                        <i class="fa-solid fa-wifi text-green-300 rotate-90 text-xs"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center justify-between">
+                            <span class="font-mono text-lg sm:text-xl font-bold tracking-widest text-slate-100">+7 925
+                                123 45 67</span>
+                            <button onclick="copyText('+79251234567')"
+                                class="bg-white/10 hover:bg-white/20 p-2 rounded-lg transition text-amber-400"
+                                title="Копировать">
+                                <i class="fa-solid fa-copy text-xs"></i>
+                            </button>
+                        </div>
+                        <div
+                            class="mt-2 flex justify-between items-end text-[11px] uppercase tracking-wider text-green-200">
+                            <div>
+                                <div class="text-[9px] text-green-300">Имя владельца</div>
+                                <div class="font-bold text-xs text-white">КРИСТИНА Д.</div>
+                            </div>
+                            <span class="text-[9px] text-green-300">СБЕР / СБП</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- KARTA 5: PAYSEND (Xalqaro o'tkazmalar) -->
+                <div
+                    class="bank-card bg-gradient-to-tr from-cyan-900 via-blue-900 to-slate-900 text-white p-6 shadow-xl relative overflow-hidden flex flex-col justify-between border border-cyan-500 sm:col-span-2 sm:max-w-md sm:mx-auto w-full">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span class="text-[11px] font-semibold uppercase tracking-widest text-cyan-300"
+                                id="req-paysend-title">Международные переводы</span>
+                            <p class="text-[10px] text-cyan-100 mt-0.5" id="req-paysend-desc">Переводы из Европы и мира
+                                via Paysend</p>
+                        </div>
+                        <span class="font-extrabold italic text-base tracking-wider text-cyan-300">PAYSEND</span>
+                    </div>
+                    <div class="flex items-center gap-3 my-1">
+                        <i class="fa-solid fa-globe text-cyan-400 text-xl"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center justify-between">
+                            <span class="font-mono text-base sm:text-lg font-bold tracking-wider text-slate-100">8600
+                                5704 5513 3578</span>
+                            <button onclick="copyText('8600570455133578')"
+                                class="bg-white/10 hover:bg-white/20 p-2 rounded-lg transition text-amber-400"
+                                title="Копировать">
+                                <i class="fa-solid fa-copy text-xs"></i>
+                            </button>
+                        </div>
+                        <div
+                            class="mt-2 flex justify-between items-end text-[11px] uppercase tracking-wider text-cyan-200">
+                            <div>
+                                <div class="text-[9px] text-cyan-300">Имя / Получатель</div>
+                                <div class="font-bold text-xs text-white">VIKTORIJA DUDNIKOVA</div>
+                            </div>
+                            <span class="text-[9px] text-cyan-300">PAYSEND</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- FOOTER & CONTACTS -->
-    <footer id="contact" class="bg-gray-900 text-white py-16 px-4">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
-            <div>
-                <div class="flex items-center gap-2 mb-4">
-                    <i class="fa-solid fa-paw text-amber-500 text-2xl"></i>
-                    <span class="font-bold text-xl">Четыре Лапы</span>
+    <!-- NEEDS AND DEBTS SECTION -->
+    <section id="reports" class="py-20 px-4 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4" id="needs-title">Нужды и Долги приюта</h2>
+                <p class="text-gray-600" id="needs-subtitle">Приюту всегда требуются корма, медикаменты и поддержка для
+                    погашения долгов перед ветклиниками.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Daily Needs -->
+                <div class="bg-amber-50/50 border border-amber-100 p-6 md:p-8 rounded-3xl">
+                    <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-basket-shopping text-amber-600"></i>
+                        <span id="needs-daily-title">Ежедневные нужды</span>
+                    </h3>
+                    <ul class="space-y-3 text-gray-700 text-sm">
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-amber-600 mt-1"></i>
+                            <span>Сухие и влажные корма для собак и кошек</span></li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-amber-600 mt-1"></i>
+                            <span>Крупы (гречка, рис) va go'sht mahsulotlari</span></li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-amber-600 mt-1"></i>
+                            <span>Медикаменты (шприцы, бинты, антибиотики)</span></li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-amber-600 mt-1"></i>
+                            <span>Строительные материалы для починки вольеров</span></li>
+                    </ul>
                 </div>
-                <p class="text-gray-400 text-sm leading-relaxed mb-4" id="foot-desc">
-                    Частный приют для бездомных животных семьи Дудниковых. Дарим шанс на жизнь спасенным хвостикам.
-                </p>
-            </div>
-            <div>
-                <h4 class="font-bold text-lg mb-4 text-amber-500" id="foot-loc-title">Локация</h4>
-                <p class="text-gray-400 text-sm leading-relaxed mb-2" id="foot-loc-desc">
-                    Ташкентская область, Янгиюльский район (за чертой города).
-                </p>
-                <p class="text-gray-400 text-sm"><i class="fa-solid fa-phone mr-2 text-amber-500"></i> +998 90 123 45 67</p>
-            </div>
-            <div>
-                <h4 class="font-bold text-lg mb-4 text-amber-500" id="foot-soc-title">Мы в соцсетях</h4>
-                <p class="text-gray-400 text-sm mb-4" id="foot-soc-desc">Следите за жизнью приюта и помогайте нам:</p>
-                <div class="flex gap-4">
-                    <a href="#" class="bg-gray-800 hover:bg-amber-600 p-3 rounded-xl transition"><i class="fa-brands fa-telegram text-xl"></i></a>
-                    <a href="#" class="bg-gray-800 hover:bg-amber-600 p-3 rounded-xl transition"><i class="fa-brands fa-instagram text-xl"></i></a>
-                    <a href="#" class="bg-gray-800 hover:bg-amber-600 p-3 rounded-xl transition"><i class="fa-brands fa-facebook text-xl"></i></a>
+
+                <!-- Debts -->
+                <div class="bg-rose-50/50 border border-rose-100 p-6 md:p-8 rounded-3xl">
+                    <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-file-invoice-dollar text-rose-600"></i>
+                        <span id="needs-debts-title">Долги в ветклиниках</span>
+                    </h3>
+                    <p class="text-gray-600 text-sm mb-4" id="needs-debts-desc">Из-за большого количества тяжёлых
+                        операций и лечения спасённых животных у приюта постоянная задолженность.</p>
+                    <div class="bg-white p-4 rounded-xl border border-rose-200">
+                        <div class="flex justify-between items-center font-bold text-gray-800">
+                            <span>Текущий долг:</span>
+                            <span class="text-rose-600 text-lg">~ 15,000,000 UZS</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="max-w-7xl mx-auto border-t border-gray-800 mt-12 pt-6 text-center text-xs text-gray-500">
-            &copy; 2026 Приют «Четыре Лапы». Все права защищены.
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="py-20 px-4 bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4" id="contact-title">Контакты и Локация</h2>
+                <p class="text-gray-600" id="contact-subtitle">Свяжитесь с нами для визита, передачи помощи или
+                    знакомства с питомцами.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border">
+                    <div
+                        class="w-12 h-12 bg-amber-100 text-amber-600 rounded-xl flex items-center justify-center mx-auto mb-4 text-xl">
+                        <i class="fa-solid fa-location-dot"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900 mb-1">Адрес</h4>
+                    <p class="text-gray-600 text-sm">Ташкентская область, Янгиюльский район</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-sm border">
+                    <div
+                        class="w-12 h-12 bg-amber-100 text-amber-600 rounded-xl flex items-center justify-center mx-auto mb-4 text-xl">
+                        <i class="fa-solid fa-phone"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900 mb-1">Телефон</h4>
+                    <p class="text-gray-600 text-sm">+998 (90) 123-45-67</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-sm border">
+                    <div
+                        class="w-12 h-12 bg-amber-100 text-amber-600 rounded-xl flex items-center justify-center mx-auto mb-4 text-xl">
+                        <i class="fa-paper-plane text-amber-600"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900 mb-1">Соцсети</h4>
+                    <div class="flex justify-center gap-4 mt-2">
+                        <a href="#" class="text-amber-600 hover:text-amber-700 text-xl"><i
+                                class="fa-brands fa-telegram"></i></a>
+                        <a href="#" class="text-amber-600 hover:text-amber-700 text-xl"><i
+                                class="fa-brands fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-900 text-gray-400 py-8 px-4 text-center text-sm border-t border-gray-800">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+            <p>© 2026 Приют «Четыре Лапы» / «To'rt Oyaq». Все права защищены.</p>
+            <p>Сделано с любовью к животным 🐾</p>
         </div>
     </footer>
 
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
-    <!-- SCRIPTS -->
     <script>
-        const swiper = new Swiper(".animalSwiper", {
+        // Swiper slider initialization
+        const swiper = new Swiper('.animalSwiper', {
             slidesPerView: 1,
             spaceBetween: 20,
             loop: true,
             autoplay: {
-                delay: 2500,
+                delay: 3000,
                 disableOnInteraction: false,
             },
             breakpoints: {
                 640: { slidesPerView: 2 },
-                768: { slidesPerView: 3 },
-                1024: { slidesPerView: 4 },
-            },
+                1024: { slidesPerView: 4 }
+            }
         });
 
+        // Copy card details function
+        function copyText(text) {
+            navigator.clipboard.writeText(text);
+            alert('Скопировано / Nusxalandi: ' + text);
+        }
+
+        // Animal Filter Logic
         function filterAnimals(type) {
             const cards = document.querySelectorAll('.animal-card');
             const btns = document.querySelectorAll('.filter-btn');
 
-            btns.forEach(btn => {
-                btn.classList.remove('bg-emerald-600', 'text-white', 'shadow-sm');
-                btn.classList.add('bg-gray-100', 'text-gray-700');
-            });
+            btns.forEach(btn => btn.classList.remove('bg-emerald-600', 'text-white'));
+            btns.forEach(btn => btn.classList.add('bg-gray-100', 'text-gray-700'));
 
-            if (type === 'all') {
-                document.getElementById('filter-all').className = "filter-btn px-6 py-2.5 rounded-full text-sm font-semibold bg-emerald-600 text-white shadow-sm transition";
-                cards.forEach(card => card.style.display = 'block');
-            } else if (type === 'dog') {
-                document.getElementById('filter-dog').className = "filter-btn px-6 py-2.5 rounded-full text-sm font-semibold bg-emerald-600 text-white shadow-sm transition";
-                cards.forEach(card => {
-                    card.style.display = card.classList.contains('dog') ? 'block' : 'none';
-                });
-            } else if (type === 'cat') {
-                document.getElementById('filter-cat').className = "filter-btn px-6 py-2.5 rounded-full text-sm font-semibold bg-emerald-600 text-white shadow-sm transition";
-                cards.forEach(card => {
-                    card.style.display = card.classList.contains('cat') ? 'block' : 'none';
-                });
+            if (event && event.currentTarget) {
+                event.currentTarget.classList.remove('bg-gray-100', 'text-gray-700');
+                event.currentTarget.classList.add('bg-emerald-600', 'text-white');
             }
+
+            cards.forEach(card => {
+                if (type === 'all' || card.classList.contains(type)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
         }
 
+        // MULTI-LANGUAGE LOGIC
         const translations = {
             ru: {
                 "nav-logo": "Четыре Лапы",
                 "nav-about": "История",
                 "nav-family": "Семья Дудниковых",
-                "nav-animals": "Они ищут дом",
+                "nav-animals": "Животные приюта",
                 "nav-donate": "Помочь",
+                "nav-requisites": "Реквизиты",
                 "nav-reports": "Нужды и Долги",
                 "nav-contact": "Контакты",
                 "nav-help-btn": "Помочь",
                 "hero-subtitle": "Частный приют в Янгиюльском районе",
                 "hero-title": "Приют для бездомных животных «Четыре Лапы»",
-                "hero-desc": "Более 1000 собак, 6 осликов, десятки котят и щенков нашли здесь спасение от смерти.",
+                "hero-desc": "Более 1000 собак, 6 осликов, десятки котят и щенков нашли здесь спасение от смерти. Приют существует только благодаря неравнодушным людям и добрым сердцам!",
                 "hero-btn-primary": "Помочь приюту (Картой)",
                 "hero-btn-secondary": "Наша история",
                 "about-title": "История создания приюта",
-                "about-p1": "История берет свое начало в 2017-2018 годах из простого неравнодушия семьи Дудниковых.",
-                "about-p2": "Так как в черте города Ташкента строительство приютов запрещено, Андрею предложили участок в Янгиюльском районе.",
-                "about-p3": "Все это время приют строится с нуля практически только руками Андрея.",
+                "about-p1": "История начинается в 2017-2018 годах из простого неравнодушия и золотого сердца семьи Дудниковых. Помогая первым 5-10 животным, они поняли, что улицы полны боли и горя.",
+                "about-p2": "Так как в черте города Ташкента строительство приютов запрещено, Андрею предложили участок во временное пользование в Янгиюльском районе. Он не смог отказать своим детям в их мечте — спасать животных.",
+                "about-p3": "Все это время приют строится с нуля практически только руками Андрея. Из отловов и с улиц они продолжают спасать хвостиков каждый день.",
                 "stat-dogs": "Собак в приюте",
                 "stat-puppies": "Щенков и котят в доме",
                 "stat-donkeys": "Спасенных осликов",
                 "stat-workers": "Смотрителя в приюте",
                 "fam-title": "Семья Дудниковых — Сердце Приюта",
-                "fam-desc": "Приют держится на любви и труде одной семьи.",
+                "fam-desc": "Приют держится на любви, заботе и самоотверженном труде одной уникальной семьи.",
                 "fam-card-title": "Семья Дудниковых",
-                "fam-card-subtitle": "Основатели приюта «Четыре Лапы»",
-                "fam-card-p1": "<strong>Андрей и Виктория Дудниковы</strong> — основатели приюта.",
-                "fam-card-p2": "Их три дочери мечтают спасать животных.",
-                "fam-card-p3": "Помогает и <strong>бабушка Тамара</strong>.",
-                "anim-title": "Они ищут дом",
-                "anim-desc": "Познакомьтесь с питомцами приюта",
+                "fam-card-subtitle": "Основатели и хранители приюта «Четыре Лапы»",
+                "anim-title": "Животные, проживающие в приюте",
+                "anim-desc": "Познакомьтесь с подопечными, которые нашли здесь заботу и защиту",
+                "slider-title": "Ищут дом",
                 "f-all": "Все",
                 "f-dogs": "Собаки",
                 "f-cats": "Кошки",
-                "anim-card1-title": "Собаки в вольерах",
-                "anim-card1-desc": "Более 1000 собак, спасенных с улиц и отловов.",
-                "anim-card3-title": "Щенки и Котята в доме",
-                "anim-card3-desc": "Около 100 малышей живут прямо в доме семьи.",
-                "slider-title": "Питомцы, которые ищут дом",
-                "slider-subtitle": "У каждого из них своя история",
-                "sl-dog1": "Собака • 2 года",
-                "sl-cat1": "Кошка • 1 год",
-                "sl-dog2": "Собака • 3 года",
-                "sl-cat2": "Кошка • 6 мес",
-                "sl-dog3": "Собака • 1.5 года",
-                "sl-cat3": "Кошка • 2 года",
-                "sl-dog4": "Собака • 4 года",
-                "sl-cat4": "Кошка • 1 год",
                 "don-title": "Приюту жизненно необходима ваша помощь!",
-                "don-desc": "Вы можете перевести пожертвование, отсканировав QR-код.",
-                "don-pay-label": "Способы перевода и Международные переводы:",
-                "rep-title": "Ежедневные нужды и долги",
-                "rep-desc": "С ростом количества животных расходы растут.",
-                "rep-c1-title": "Еда и Спецпитание",
-                "rep-c1-desc": "Огромные закупки корма.",
-                "rep-c2-title": "Лечение и Прививки",
-                "rep-c2-desc": "Оплата ветклиник, лекарства.",
-                "rep-c3-title": "Строительство вольеров",
-                "rep-c3-desc": "Покупка стройматериалов.",
-                "rep-c4-title": "Зарплата и Коммуналка",
-                "rep-c4-desc": "Оплата труда смотрителей.",
-                "foot-desc": "Частный приют для бездомных животных семьи Дудниковых.",
-                "foot-loc-title": "Локация",
-                "foot-loc-desc": "Ташкентская область, Янгиюльский район.",
-                "foot-soc-title": "Мы в соцсетях",
-                "foot-soc-desc": "Следите за жизнью приюта:"
+                "don-desc": "Приют частный, без господдержки и постоянных спонсоров. Вы можете перевести пожертвование, отсканировав QR-код приложения.",
+                "req-title": "Реквизиты для помощи приюту «Четыре лапы» Ташкент",
+                "req-paysend-title": "Международные переводы",
+                "req-paysend-desc": "Переводы из Европы и мира via Paysend"
             },
             uz: {
                 "nav-logo": "To'rt Oyaq",
                 "nav-about": "Tarix",
-                "nav-family": "Dudnikovlar Oilasi",
-                "nav-animals": "Ular uylarini qidirmoqdalar",
+                "nav-family": "Dudnikovlar oilasi",
+                "nav-animals": "Priyut hayvonlari",
                 "nav-donate": "Yordam berish",
+                "nav-requisites": "Rekvizitlar",
                 "nav-reports": "Ehtiyoj va Qarzdorlik",
                 "nav-contact": "Aloqa",
-                "nav-help-btn": "Yordam berish",
+                "nav-help-btn": "Yordam",
                 "hero-subtitle": "Yangiyo'l tumanidagi xususiy priyut",
-                "hero-title": "«To'rt Oyaq» uysiz jonivorlar priyuti",
-                "hero-desc": "1000 dan ziyod itlar, 6 ta eshak, o'nlarcha kuchukcha va mushuklar o'limdan qutqarib qolindi.",
-                "hero-btn-primary": "Priyutga yordam berish (Karta orqali)",
+                "hero-title": "«To'rt Oyaq» boshpanasiz hayvonlar priyuti",
+                "hero-desc": "1000 dan ortiq itlar, 6 ta eshak, o'nlab mushuk va kuchukchalar bu yerda o'limdan saqlab qolindi. Priyut faqat saxovatli insonlar yordamida mavjud!",
+                "hero-btn-primary": "Priyutga yordam berish (Karta)",
                 "hero-btn-secondary": "Bizning tarix",
-                "about-title": "Priyutning tashkil topish tarixi",
-                "about-p1": "Priyut tarixi Dudnikovlar oilasining yuksak mehri tufayli boshlangan.",
-                "about-p2": "Toshkent shahri ichida priyut qurish taqiqlangani sababli Yangiyo'ldan yer ajratildi.",
-                "about-p3": "Shu vaqtdan beri priyut Andreyning o'z qo'llari bilan qurilmoqda.",
+                "about-title": "Priyut tashkil topish tarixi",
+                "about-p1": "Tarix 2017-2018 yillarda Dudnikovlar oilasining mehribonligi bilan boshlangan. Dastlabki 5-10 ta hayvonga yordam berib, ko'chalar azobga to'la ekanligini anglab yetishdi.",
+                "about-p2": "Toshkent shahri hududida priyut qurish taqiqlangani sababli, Andreyga Yangiyo'l tumanidan vaqtincha yer ajratildi. U farzandlarining hayvonlarni qutqarish orzusini rad eta olmadi.",
+                "about-p3": "Shu davr mobaynida priyut deyarli faqat Andreyning o'z qo'llari bilan qurildi. Ular har kuni ko'chalardan jonivorlarni qutqarishda davom etmoqda.",
                 "stat-dogs": "Priyutdagi itlar",
-                "stat-puppies": "Uyda parvarishdagi kuchukcha/mushuklar",
-                "stat-donkeys": "Qutqarib olingan eshaklar",
-                "stat-workers": "Priyutdagi qarovchilar",
-                "fam-title": "Dudnikovlar Oilasi — Priyut Yuragi",
-                "fam-desc": "Priyut bitta oilaning mehri evaziga faoliyat yuritmoqda.",
-                "fam-card-title": "Dudnikovlar Oilasi",
-                "fam-card-subtitle": "Priyut asoschilari",
-                "fam-card-p1": "<strong>Andrey va Viktoriya Dudnikovlar</strong> — priyut asoschilari.",
-                "fam-card-p2": "Qizlari jonivorlarni qutqarishni orzu qilishgan.",
-                "fam-card-p3": "Ularga <strong>Buvi Tamara</strong> ham yordam beradi.",
-                "anim-title": "Ular uylarini qidirmoqdalar",
-                "anim-desc": "Priyutimizdagi ba'zi jonivorlar bilan tanishing va ularga do'st bo'ling",
+                "stat-puppies": "Uydagi kuchuk va mushuklar",
+                "stat-donkeys": "Qutqarilgan eshaklar",
+                "stat-workers": "Priyut qarovchilari",
+                "fam-title": "Dudnikovlar oilasi — Priyut yuragi",
+                "fam-desc": "Priyut bir oilaning sevgisi, g'amxo'rligi va fidokorona mehnati evaziga yashamoqda.",
+                "fam-card-title": "Dudnikovlar oilasi",
+                "fam-card-subtitle": "«To'rt Oyaq» priyutining asoschilari",
+                "anim-title": "Priyutda yashayotgan jonivorlar",
+                "anim-desc": "Bu yerda g'amxo'rlik va himoya topgan jonivorlar bilan tanishing",
+                "slider-title": "O'z uyini izlamoqda",
                 "f-all": "Barchasi",
                 "f-dogs": "Itlar",
                 "f-cats": "Mushuklar",
-                "anim-card1-title": "Valyerlardagi itlar",
-                "anim-card1-desc": "Ko'chadan va otlovdan qutqarilgan 1000 dan ziyod itlar.",
-                "anim-card3-title": "Uyda yashayotgan kichintoylar",
-                "anim-card3-desc": "100 ga yaqin kichik jonivorlar oilaning o'z uyida davolanmoqda.",
-                "slider-title": "Uy qidirayotgan jonivorlarimiz",
-                "slider-subtitle": "Har birining o'z taqdiri bor",
-                "sl-dog1": "It • 2 yosh",
-                "sl-cat1": "Mushuk • 1 yosh",
-                "sl-dog2": "It • 3 yosh",
-                "sl-cat2": "Mushuk • 6 oy",
-                "sl-dog3": "It • 1.5 yosh",
-                "sl-cat3": "Mushuk • 2 yosh",
-                "sl-dog4": "It • 4 yosh",
-                "sl-cat4": "Mushuk • 1 yosh",
                 "don-title": "Priyutga sizning yordamingiz juda zarur!",
-                "don-desc": "QR-kodni skanerlash orqali xayriya qilishingiz mumkin.",
-                "don-pay-label": "To'lov usullari va Xalqaro o'tkazmalar:",
-                "rep-title": "Kunlik ehtiyojlar va qarzdorliklar",
-                "rep-desc": "Jonivorlar soni ortgani sari xarajatlar ham o'sib bormoqda.",
-                "rep-c1-title": "Oziq-ovqat va Maxsus yem",
-                "rep-c1-desc": "1000 dan ortiq itlar uchun oziq-ovqat xaridi.",
-                "rep-c2-title": "Davolash va Vaksinalar",
-                "rep-c2-desc": "Vetklinika xarajatlari va dorilar.",
-                "rep-c3-title": "Valyerlar qurilishi",
-                "rep-c3-desc": "Yangi valyerlar qurishga xaridlar.",
-                "rep-c4-title": "Maosh va Kommunal",
-                "rep-c4-desc": "2 ta qarovchining maoshi, kommunal to'lovlar.",
-                "foot-desc": "Dudnikovlar oilasining uysiz jonivorlar uchun xususiy priyuti.",
-                "foot-loc-title": "Joylashuv",
-                "foot-loc-desc": "Toshkent viloyati, Yangiyo'l tumani.",
-                "foot-soc-title": "Ijtimoiy tarmoqlar",
-                "foot-soc-desc": "Priyut hayotini kuzatib boring:"
+                "don-desc": "Priyut xususiy bo'lib, davlat qo'llab-quvvatlovi yoki doimiy homiylarga ega emas. Ilova QR-kodini skanerlab xayriya qilishingiz mumkin.",
+                "req-title": "«To'rt oyaq» priyutiga yordam berish uchun rekvizitlar",
+                "req-paysend-title": "Xalqaro pul o'tkazmalari",
+                "req-paysend-desc": "Yevropa va dunyo bo'ylab Paysend orqali o'tkazmalar"
+            },
+            en: {
+                "nav-logo": "Four Paws",
+                "nav-about": "History",
+                "nav-family": "Dudnikov Family",
+                "nav-animals": "Our Animals",
+                "nav-donate": "Donate",
+                "nav-requisites": "Requisites",
+                "nav-reports": "Needs & Debts",
+                "nav-contact": "Contacts",
+                "nav-help-btn": "Help",
+                "hero-subtitle": "Private shelter in Yangiyul district",
+                "hero-title": "«Four Paws» Shelter for Homeless Animals",
+                "hero-desc": "Over 1,000 dogs, 6 donkeys, and dozens of kittens and puppies saved from death. The shelter exists only thanks to caring people!",
+                "hero-btn-primary": "Donate (Card)",
+                "hero-btn-secondary": "Our History",
+                "about-title": "Shelter History",
+                "about-p1": "The story began in 2017-2018 with the big hearts of the Dudnikov family. After helping their first 5-10 animals, they realized how many homeless animals needed help.",
+                "about-p2": "Since building shelters within Tashkent city limits is prohibited, Andrey was offered a plot in the Yangiyul district. He couldn't refuse his children's dream to rescue animals.",
+                "about-p3": "All this time, the shelter has been built almost entirely by Andrey's hands. They continue rescuing animals every single day.",
+                "stat-dogs": "Dogs in shelter",
+                "stat-puppies": "Puppies & kittens at home",
+                "stat-donkeys": "Rescued donkeys",
+                "stat-workers": "Caretakers",
+                "fam-title": "The Dudnikov Family — The Heart of the Shelter",
+                "fam-desc": "The shelter relies on the love and selfless hard work of one dedicated family.",
+                "fam-card-title": "The Dudnikov Family",
+                "fam-card-subtitle": "Founders of «Four Paws» shelter",
+                "anim-title": "Animals Living in the Shelter",
+                "anim-desc": "Meet the pets who found care and safety here",
+                "slider-title": "Looking for a home",
+                "f-all": "All",
+                "f-dogs": "Dogs",
+                "f-cats": "Cats",
+                "don-title": "The shelter urgently needs your support!",
+                "don-desc": "This is a private shelter with no government support or permanent sponsors. You can donate by scanning app QR codes.",
+                "req-title": "Requisites for supporting «Four Paws» shelter",
+                "req-paysend-title": "International transfers",
+                "req-paysend-desc": "Transfers from Europe & worldwide via Paysend"
             }
         };
 
-        function switchLang(lang) {
-            Object.keys(translations[lang]).forEach(key => {
-                const el = document.getElementById(key);
-                if (el) {
-                    el.innerHTML = translations[lang][key];
+        function changeLanguage(lang) {
+            const btns = { ru: 'btn-ru', uz: 'btn-uz', en: 'btn-en' };
+            Object.keys(btns).forEach(key => {
+                const btn = document.getElementById(btns[key]);
+                if (btn) {
+                    if (key === lang) {
+                        btn.className = 'px-2 py-1 rounded-lg bg-amber-600 text-white transition font-bold';
+                    } else {
+                        btn.className = 'px-2 py-1 rounded-lg text-gray-600 hover:text-gray-900 transition font-bold';
+                    }
                 }
             });
 
-            const qrTexts = document.querySelectorAll('.qr-scan-text');
-            qrTexts.forEach(el => {
-                el.innerText = lang === 'ru' ? "Сканируйте для оплаты" : "To'lov qilish uchun skanerlang";
-            });
+            const langData = translations[lang];
+            if (!langData) return;
 
-            if (lang === 'ru') {
-                document.getElementById('btn-ru').className = "px-2.5 py-1 rounded-lg bg-amber-600 text-white transition";
-                document.getElementById('btn-uz').className = "px-2.5 py-1 rounded-lg text-gray-600 hover:text-gray-900 transition";
-            } else {
-                document.getElementById('btn-uz').className = "px-2.5 py-1 rounded-lg bg-amber-600 text-white transition";
-                document.getElementById('btn-ru').className = "px-2.5 py-1 rounded-lg text-gray-600 hover:text-gray-900 transition";
-            }
+            Object.keys(langData).forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.innerText = langData[id];
+                }
+            });
         }
+
+        document.getElementById('btn-ru').addEventListener('click', () => changeLanguage('ru'));
+        document.getElementById('btn-uz').addEventListener('click', () => changeLanguage('uz'));
+        document.getElementById('btn-en').addEventListener('click', () => changeLanguage('en'));
     </script>
 </body>
+
 </html>
